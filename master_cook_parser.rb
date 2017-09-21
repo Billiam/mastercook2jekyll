@@ -28,7 +28,7 @@ module MasterCookParser
   def parse_recipe(data)
     recipe = Recipe.new
     
-    results = recipe_regex.match(data)
+    results = recipe_regex.match(data.gsub(/Ã£/, 'ã').gsub(/Â/,''))
 
     raise "Could not parse: #{data}" unless results
     
@@ -45,7 +45,7 @@ module MasterCookParser
     recipe.tags = categories
 
     recipe.ingredients = results['ingredients'].split(/\n+/).map(&:strip).reject(&:empty?).map do |ingredient|
-      ingredient.gsub(/ +/, ' ').gsub(/(^\d+)\s+Unit/, '\1')
+      ingredient.gsub(/ +/, ' ').gsub(/(^\d+)\s+Unit/, '\1').gsub(/\bCup\b/, 'c').gsub(/\bTablespoon\b/, 'T').gsub(/\bTeaspoon\b/, 't').gsub(/\bOunce\b/, 'oz')
     end
     recipe.steps = results['steps'].gsub(/^(\d+\)|\*)\s*/, '').split(/\n+/).map(&:strip).reject(&:empty?)
 

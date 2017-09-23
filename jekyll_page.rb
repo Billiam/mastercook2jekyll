@@ -25,7 +25,7 @@ tags:
 * Servings: <%= servings %>
 <% end -%>
 
-* Prep Time: <% if prep_hours > 0 %><%= prep_hours %> hour<%='s' if prep_hours != 1 %><% end %><% if prep_minutes > 0 %><%= prep_minutes %> minute<%='s' if prep_minutes != 1 %><% end %>
+* Prep Time: <%= formatted_prep_time %>
 
 <% if notes -%>
 <%= notes %>

@@ -33,8 +33,8 @@ tags:
 <% end -%>
 ## Ingredients:
 
-<% ingredients.each do |ingredient| -%>
-  * <%= ingredient %>
+<% parsed_ingredients.each do |ingredient| -%>
+<%= ingredient.quantity %> | <%= ingredient.item %>
 <% end -%>
 
 ## Directions:
